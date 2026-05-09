@@ -1,0 +1,77 @@
+KTTKPM_W9\Space-Based-Architecture\k6-tests> cat .\stress-test.js | docker run --rm -i grafana/k6 run -
+
+         /\      Grafana   /‾‾/
+    /\  /  \     |\  __   /  /
+   /  \/    \    | |/ /  /   ‾‾\
+  /          \   |   (  |  (‾)  |
+ / __________ \  |_|\_\  \_____/
+
+
+     execution: local
+        script: -
+        output: -
+
+     scenarios: (100.00%) 1 scenario, 500 max VUs, 1m15s max duration (incl. graceful stop):
+              * stress: Up to 500 looping VUs for 45s over 5 stages (gracefulRampDown: 30s, gracefulStop: 30s)
+
+
+running (0m01.0s), 019/500 VUs, 70 complete and 0 interrupted iterations
+stress   [   2% ] 019/500 VUs  01.0s/45.0s
+
+.
+.
+.
+
+running (0m45.0s), 009/500 VUs, 48674 complete and 0 interrupted iterations
+stress   [ 100% ] 009/500 VUs  45.0s/45.0s
+
+
+  █ THRESHOLDS
+
+    errors
+    ✓ 'rate<0.15' rate=0.00%
+
+    http_req_duration
+    ✓ 'p(95)<1000' p(95)=176.91ms
+
+    http_req_failed
+    ✗ 'rate<0.1' rate=25.00%
+
+
+  █ TOTAL RESULTS
+
+    checks_total.......: 194732  4322.687904/s
+    checks_succeeded...: 100.00% 194732 out of 194732
+    checks_failed......: 0.00%   0 out of 194732
+
+    ✓ products OK
+    ✓ cart add OK
+    ✓ checkout OK
+    ✓ stock OK
+
+    CUSTOM
+    errors.........................: 0.00%  0 out of 194732
+    req_duration...................: avg=49.438733 min=0.669705 med=20.712083 max=464.05898 p(90)=136.204039 p(95)=176.917806
+
+    HTTP
+    http_req_duration..............: avg=49.43ms   min=669.7µs  med=20.71ms   max=464.05ms  p(90)=136.2ms    p(95)=176.91ms
+      { expected_response:true }...: avg=45.17ms   min=669.7µs  med=15.21ms   max=464.05ms  p(90)=151.21ms   p(95)=188.53ms
+    http_req_failed................: 25.00% 48683 out of 194732
+    http_reqs......................: 194732 4322.687904/s
+
+    EXECUTION
+    iteration_duration.............: avg=298.78ms  min=106.13ms med=314.23ms  max=733.03ms  p(90)=428.57ms   p(95)=481.49ms
+    iterations.....................: 48683  1080.671976/s
+    vus............................: 9      min=9               max=500
+    vus_max........................: 500    min=500             max=500
+
+    NETWORK
+    data_received..................: 159 MB 3.5 MB/s
+    data_sent......................: 30 MB  658 kB/s
+
+
+
+
+running (0m45.0s), 000/500 VUs, 48683 complete and 0 interrupted iterations
+stress ✓ [ 100% ] 000/500 VUs  45s
+time="2026-05-09T12:41:50Z" level=error msg="thresholds on metrics 'http_req_failed' have been crossed"

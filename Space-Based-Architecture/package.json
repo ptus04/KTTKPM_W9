@@ -1,0 +1,12 @@
+{
+  "name": "seed-redis",
+  "version": "1.0.0",
+  "description": "Seed script for Redis Data Grid",
+  "main": "seed-redis.js",
+  "scripts": {
+    "seed": "node seed-redis.js"
+  },
+  "dependencies": {
+    "ioredis": "^5.3.2"
+  }
+}
